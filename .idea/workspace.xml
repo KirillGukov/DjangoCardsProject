@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="43121132-db7d-48b5-a4b8-8752c342d6bf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DjangoCardsProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DjangoCardsProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardsite/cards/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/cardsite/cards/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardsite/cards/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/cardsite/cards/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardsite/cards/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/cardsite/cards/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardsite/cardsite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cardsite/cardsite/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardsite/cardsite/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cardsite/cardsite/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cardsite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/cardsite/db.sqlite3" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "KirillGukov"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:KirillGukov/DjangoCardsproject.git",
+    "accountId": "4e459363-837e-4400-a9f2-9d36e2c76667"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2swXDtl3ZIeHm0mW9YGmuu6xzBz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.manage.executor": "Run",
+    "Python.urls.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/WorkingDir/DjangoCardsProject/cardsite/manage.py"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="manage" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="DjangoCardsProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.13 (DjangoCardsProject)" />
+      <option name="WORKING_DIRECTORY" value="D:\WorkingDir\DjangoCardsProject" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cardsite/manage.py" />
+      <option name="PARAMETERS" value="runserver" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="43121132-db7d-48b5-a4b8-8752c342d6bf" name="Changes" comment="" />
+      <created>1739367495162</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739367495162</updated>
+    </task>
+    <servers />
+  </component>
+</project>

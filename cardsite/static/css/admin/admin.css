@@ -1,0 +1,38 @@
+html, body {
+	font-family:'General Sans';
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	color: #DAD7CD;
+	background: #dad7cd;
+}
+
+body h1 {
+    color: #344E41;
+}
+
+#header, .module caption, #changelist-filter-header {
+    background: #344E41
+}
+
+div.breadcrumbs {
+    background: #588157
+}
+
+#nav-sidebar.sticky {
+    background: #A3B18A
+}
+
+#toggle-nav-sidebar{
+    background: #588157;
+}
+
+#changelist {
+    background: #344E41
+}
+
+# changelist.actions {
+    background: #344E41
+}
+

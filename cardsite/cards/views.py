@@ -41,7 +41,7 @@ def show_post(request, post_slug):
 
 
 def add_post(request):
-    return HttpResponse('Добавление статьи')
+    return render(request, 'cards/add_post.html', {'menu': menu, 'title': 'Добавление статьи'})
 
 
 def contacts(request):

@@ -14,19 +14,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from cards.views import page_not_found
 from cards import views
-
-
-
+from cardsite import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('cards.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 ]
+
+
+# Необходимо только в режиме отладки, в рабочем режиме-эта настройка уже будет по умолчанию.
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 handler404 = page_not_found

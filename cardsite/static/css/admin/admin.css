@@ -8,6 +8,10 @@ html, body {
 	background: #dad7cd;
 }
 
+a:link, a:visited{
+    color: #DAD7CD;
+}
+
 body h1 {
     color: #344E41;
 }
@@ -28,11 +32,37 @@ div.breadcrumbs {
     background: #588157;
 }
 
-#changelist {
-    background: #344E41
+.object-tools a:link, .object-tools a:visited {
+    background: #344E41;
 }
 
-# changelist.actions {
-    background: #344E41
+a.addlink {
+    color: #DAD7CD;
 }
 
+html[data-theme="dark"] {
+    --body-bg: #3A5A40;
+    --darkened-bg: #344E41;
+    --selected-bg: #588157;
+}
+
+.theme-toggle svg.theme-icon-when-auto, .theme-toggle svg.theme-icon-when-dark, .theme-toggle svg.theme-icon-when-light{
+    color: #344E41;
+}
+
+html[data-theme="light"], :root {
+    --delete-button-bg: #588157;
+    --delete-button-hover-bg: #588157;
+    --button-fg: #DAD7CD;
+    --button-hover-bg: #3A5A40;
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    background: #A3B18A;
+}
+
+html[data-theme="light"],
+:root {
+    --primary: #588157;
+    --secondary: #588157;
+}

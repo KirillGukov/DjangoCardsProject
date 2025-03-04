@@ -1,15 +1,17 @@
 from django.contrib import admin, messages
+from django.utils.safestring import mark_safe
+
 from .models import Posts, Category
 
 
 @admin.register(Posts)
 class PostsAdmin(admin.ModelAdmin):
-    fields = ['title', 'slug', 'content', 'cat', 'tags']
+    fields = ['title', 'slug', 'content', 'images', 'post_image', 'cat', 'tags']
     # exclude = ['tags', 'is_published']
-    # readonly_fields = ['slug']
+    readonly_fields = ['post_image']
     prepopulated_fields = {'slug': ('title',)}
     filter_horizontal = ['tags']
-    list_display = ('title', 'time_create', 'is_published', 'cat', 'brief_info')
+    list_display = ('title', 'post_image', 'time_create', 'is_published', 'cat')
     list_display_links = ('title',)
     ordering = ['-time_create', 'title']
     list_editable = ('is_published',)
@@ -17,11 +19,15 @@ class PostsAdmin(admin.ModelAdmin):
     actions = ['set_published', 'set_draft']
     search_fields = ['title', 'cat__name']
     list_filter = ['cat__name', 'is_published']
+    save_on_top = True
 
 
-    @admin.display(description='Краткое описание', ordering='content')
-    def brief_info(self, posts: Posts):
-        return f"Содержит {len(posts.content)} символов"
+    @admin.display(description='Изображение', ordering='content')
+    def post_image(self, posts: Posts):
+        if posts.images:
+            return mark_safe(f"<img src='{posts.images.url}' width=50>")
+        else:
+            return "Без изображения"
 
 
     @admin.action(description='Опубликовать выбранные записи')

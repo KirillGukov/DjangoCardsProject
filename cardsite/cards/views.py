@@ -1,47 +1,73 @@
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseNotFound, Http404, HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.template.loader import render_to_string
+from django.views import View
+from django.views.generic import TemplateView, ListView, DetailView, FormView, CreateView, UpdateView, DeleteView
 
-from .models import Posts, Category, TagPost
-
-menu = [
-    {'title': 'О сайте', 'url_name': 'about'},
-    {'title': 'Добавить статью', 'url_name': 'add_post'},
-    {'title': 'Обратная связь', 'url_name': 'contacts'},
-    {'title': 'Войти', 'url_name': 'login'},
-]
+from .forms import AddPostForm, UploadFilesForm
+from .models import Posts, Category, TagPost, UploadFiles
+from .utils import DataMixin
 
 
-def index(request):
-    posts = Posts.published.all().select_related('cat')
-    data = {
-        'title': 'Dream House',
-        'menu': menu,
-        'posts': posts,
-        'cat_selected': 0,
-    }
-
-    return render(request, 'cards/index.html', context=data)
+class CardsHome(DataMixin, ListView):
+    template_name = 'cards/index.html'
+    context_object_name = 'posts'
+    title_page = 'Dream House'
+    cat_selected = 0
 
 
-def about(request):
-    return render(request, 'cards/about.html', {'title': 'О сайте', 'menu': menu})
+    def get_queryset(self):
+        return Posts.published.all().select_related('cat')
 
 
-def show_post(request, post_slug):
-    post = get_object_or_404(Posts, slug=post_slug)
-    data = {
-        'title': post.title,
-        'menu': menu,
-        'post': post,
-        'cat_selected': 1,
-    }
-    return render(request, 'cards/post.html', data)
+def load_image(request):
+    contact_list = Posts.published.all()
+    paginator = Paginator(contact_list, 3)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'cards/load_image.html',
+                  {'title': 'Изображение', 'page_obj': page_obj})
 
 
-def add_post(request):
-    return render(request, 'cards/add_post.html', {'menu': menu, 'title': 'Добавление статьи'})
+
+class ShowPost(DataMixin ,DetailView):
+    template_name = 'cards/post.html'
+    slug_url_kwarg = 'post_slug'
+    context_object_name = 'post'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context, title=context['post'].title)
+
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Posts.published, slug=self.kwargs[self.slug_url_kwarg])
+
+
+class AddPost(DataMixin, CreateView):
+    form_class = AddPostForm
+    template_name = 'cards/add_post.html'
+    title_page = 'Добавление статьи'
+    success_url = reverse_lazy('home')
+
+
+class UpdatePost(DataMixin, UpdateView):
+    model = Posts
+    fields = ['title', 'content', 'images', 'is_published', 'cat']
+    template_name = 'cards/add_post.html'
+    success_url = reverse_lazy('home')
+    title_page = 'Редактирование статьи'
+
+
+class DeletePost(DeleteView):
+    model = Posts
+    template_name = 'cards/add_post.html'
+    success_url = reverse_lazy('home')
+
 
 
 def contacts(request):
@@ -52,29 +78,36 @@ def login(request):
     return HttpResponse('Авторизация')
 
 
-def show_category(request, cat_slug):
-    category = get_object_or_404(Category, slug=cat_slug)
-    posts = Posts.published.filter(cat_id=category.pk).select_related('cat')
-    data = {
-        'title': f'Рубрика: {category.name}',
-        'menu': menu,
-        'posts': posts,
-        'cat_selected': category.pk,
-    }
-    return render(request, 'cards/index.html', context=data)
+class PostsCategory(DataMixin, ListView):
+    template_name = 'cards/index.html'
+    context_object_name = 'posts'
+    allow_empty = False
+
+    def get_queryset(self):
+        return Posts.published.filter(cat__slug=self.kwargs['cat_slug']).select_related('cat')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cat = context['posts'][0].cat
+        return self.get_mixin_context(context,
+                                      title='Категория - ' + cat.name,
+                                      cat_selected=cat.pk
+                                      )
 
 
-def show_tag_postlist(request, tag_slug):
-    tag = get_object_or_404(TagPost, slug=tag_slug)
-    posts = tag.tags.filter(is_published=Posts.Status.PUBLISHED).select_related('cat')
+class TagPostList(DataMixin, ListView):
+    template_name = 'cards/index.html'
+    context_object_name = 'posts'
+    allow_empty = False
 
-    data = {
-        'title': f"Тег: { tag.tag }",
-        'menu': menu,
-        'posts': posts,
-        'cat_selected': None,
-    }
-    return render(request, 'cards/index.html', context=data)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        tag = TagPost.objects.get(slug=self.kwargs['tag_slug'])
+        return self.get_mixin_context(context, title='Тег: ' + tag.tag)
+
+
+    def get_queryset(self):
+        return Posts.published.filter(tags__slug=self.kwargs['tag_slug']).select_related('cat')
 
 
 def page_not_found(request, exception):
